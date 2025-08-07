@@ -2,9 +2,11 @@ package com.niit.mms.learning_api.service;
 
 import com.niit.mms.learning_api.entity.Student;
 import com.niit.mms.learning_api.repository.StudentRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class StudentServiceImpl implements StudentService {
 
     public final StudentRepository studentRepository;
