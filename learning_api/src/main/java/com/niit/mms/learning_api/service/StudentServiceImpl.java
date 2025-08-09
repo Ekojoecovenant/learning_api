@@ -28,6 +28,9 @@ public class StudentServiceImpl implements StudentService {
                 existing.setMiddleName(existing.getMiddleName());
                 existing.setLastName(existing.getLastName());
                 existing.setPhone(existing.getPhone());
+                existing.setDob(existing.getDob());
+                existing.setAge(existing.getAge());
+                existing.setGender(existing.getGender());
 
                 return studentRepository.save(existing);
             }
