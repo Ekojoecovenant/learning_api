@@ -35,6 +35,11 @@ public class Course {
     @Column(name = "duration", nullable = false, length = 3)
     private int duration;
 
+    @NotBlank(message = "Instructor is required")
+    @Size(max = 50, message = "Instructor must be at most 3 characters")
+    @Column(name = "instructor", nullable = false, length = 50)
+    private int instructor;
+
     @Lob
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;

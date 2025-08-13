@@ -30,19 +30,11 @@ public class CourseServiceImpl implements CourseService {
             updatedCourse.setDescription(updatedCourse.getDescription());
             updatedCourse.setDuration(updatedCourse.getDuration());
             updatedCourse.setTitle(updatedCourse.getTitle());
+            updatedCourse.setInstructor(updatedCourse.getInstructor());
             // Add other fields as needed
             return courseRepository.save(updatedCourse);
         }
         throw new RuntimeException("Course not found with id: " + id);
-//        return courseRepository.findById(id).map(existing -> {
-//
-//                    existing.setDescription(existing.getDescription());
-//                    existing.setDuration(existing.getDuration());
-//                    existing.setTitle(existing.getTitle());
-//
-//                    return courseRepository.save(existing);
-//                }
-//        ).orElse(null);
     }
 
     @Override
