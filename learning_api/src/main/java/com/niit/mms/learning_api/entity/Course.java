@@ -33,7 +33,7 @@ public class Course {
     private String title;
 
     @Min(value = 1, message = "Duration must be at least 1 hour")
-    @Max(value = 99, message = "Duration must be not exceed 99 hours")
+    @Max(value = 99, message = "Duration must not exceed 99 hours")
     @Column(name = "duration", nullable = false, length = 3)
     private int duration;
 
