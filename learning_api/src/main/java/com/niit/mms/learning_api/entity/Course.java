@@ -7,6 +7,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Lob;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -30,15 +32,15 @@ public class Course {
     @Column(name = "title", nullable = false, length = 50)
     private String title;
 
-    @NotBlank(message = "Duration is required")
-    @Size(max = 3, message = "Duration must be at most 3 characters")
+    @Min(value = 1, message = "Duration must be at least 1 hour")
+    @Max(value = 99, message = "Duration must be not exceed 99 hours")
     @Column(name = "duration", nullable = false, length = 3)
     private int duration;
 
     @NotBlank(message = "Instructor is required")
     @Size(max = 50, message = "Instructor must be at most 3 characters")
     @Column(name = "instructor", nullable = false, length = 50)
-    private int instructor;
+    private String instructor;
 
     @Lob
     @Column(name = "description", columnDefinition = "TEXT")
