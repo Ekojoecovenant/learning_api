@@ -1,20 +1,20 @@
 package com.niit.mms.learning_api.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Lob;
+import com.fasterxml.jackson.annotation.JsonBackReference; // newly added
+import jakarta.persistence.*; // newly added
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Builder; // newly added
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet; // newly added
+import java.util.Set; // newly added
+
+@Builder // newly added
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -45,5 +45,11 @@ public class Course {
     @Lob
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
+
+    // This is what we added today (20th August 2025)
+    @ManyToMany(mappedBy = "course")
+    @JsonBackReference
+    @Builder.Default
+    private Set<Student> student = new HashSet<>();
 
 }

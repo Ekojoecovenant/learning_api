@@ -1,11 +1,17 @@
 package com.niit.mms.learning_api.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference; // newly added
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder; // newly added
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet; // newly added
+import java.util.Set; // newly added
+
+@Builder // newly added
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -57,4 +63,30 @@ public class Student {
     )
     @Column(name = "phone", nullable = false, unique = true, length = 15)
     private String phone;
+
+    /*          This is what we added today (20th August 2025)          */
+    //  To add the relationship between the Course table and the Student table
+    @ManyToMany // This relationship is a many-to-many relationship
+    @JoinTable(
+            name = "candidate_subject",
+            joinColumns = @JoinColumn(name = "candidate_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id")
+    )
+    @JsonManagedReference
+    @Builder.Default
+    private Set<Course> course = new HashSet<>();
+
+
+    // Helper Methods
+
+    public void addCourse(Course course) {
+        this.course.add(course);
+        course.getStudent().add(this);
+    }
+
+    public void removeCourse(Course course) {
+        this.course.remove(course);
+        course.getStudent().remove(this);
+    }
+
 }
