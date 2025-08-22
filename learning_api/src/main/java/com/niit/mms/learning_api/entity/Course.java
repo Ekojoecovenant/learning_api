@@ -38,7 +38,7 @@ public class Course {
     private int duration;
 
     @NotBlank(message = "Instructor is required")
-    @Size(max = 50, message = "Instructor must be at most 3 characters")
+    @Size(max = 50, message = "Instructor must be at most 50 characters")
     @Column(name = "instructor", nullable = false, length = 50)
     private String instructor;
 

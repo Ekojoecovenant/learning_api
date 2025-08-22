@@ -19,15 +19,15 @@ public class CourseController {
     }
 
     // ✅ CREATE - Save a new course
-    @PostMapping
-    public ResponseEntity<Course> saveStudent(@Valid @RequestBody Course course) {
+    @PostMapping(consumes = "application/json;charset=UTF-8")
+    public ResponseEntity<Course> saveCourse(@Valid @RequestBody Course course) {
         Course savedCourse = courseService.saveCourse(course);
         return ResponseEntity.ok(savedCourse);
     }
 
     // ✅ UPDATE - Update course details
     @PutMapping("/{id}")
-    public ResponseEntity<Course> updateStudent(@PathVariable Long id, @Valid @RequestBody Course course) {
+    public ResponseEntity<Course> updateCourse(@PathVariable Long id, @Valid @RequestBody Course course) {
         Course updatedCourse = courseService.updateCourse(id, course);
         if (updatedCourse == null) {
             return ResponseEntity.notFound().build();
@@ -37,7 +37,7 @@ public class CourseController {
 
     // ✅ READ - Get a single course by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Course> getStudentById(@PathVariable Long id) {
+    public ResponseEntity<Course> getCourseById(@PathVariable Long id) {
         Course course = courseService.findCourse(id);
         if (course == null) {
             return ResponseEntity.notFound().build();
@@ -47,14 +47,14 @@ public class CourseController {
 
     // ✅ READ - Get all courses
     @GetMapping
-    public ResponseEntity<List<Course>> getAllStudents() {
-        List<Course> students = courseService.findAllCourses(null, null);
-        return ResponseEntity.ok(students);
+    public ResponseEntity<List<Course>> getAllCourses() {
+        List<Course> courses = courseService.findAllCourses(null, null);
+        return ResponseEntity.ok(courses);
     }
 
     // ✅ DELETE - Delete a course by ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
         return ResponseEntity.noContent().build();
     }
