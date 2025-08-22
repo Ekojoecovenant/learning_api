@@ -17,8 +17,9 @@ public class StudentController {
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
+
     // ✅ CREATE - Save a new student
-    @PostMapping
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<Student> saveStudent(@Valid @RequestBody Student student) {
         Student savedStudent = studentService.saveStudent(student);
         return ResponseEntity.ok(savedStudent);
@@ -57,4 +58,5 @@ public class StudentController {
         studentService.deleteStudent(id);
         return ResponseEntity.noContent().build();
     }
+
 }

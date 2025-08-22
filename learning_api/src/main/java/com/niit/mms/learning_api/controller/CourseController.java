@@ -19,7 +19,7 @@ public class CourseController {
     }
 
     // ✅ CREATE - Save a new course
-    @PostMapping(consumes = "application/json")
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<Course> saveCourse(@Valid @RequestBody Course course) {
         Course savedCourse = courseService.saveCourse(course);
         return ResponseEntity.ok(savedCourse);

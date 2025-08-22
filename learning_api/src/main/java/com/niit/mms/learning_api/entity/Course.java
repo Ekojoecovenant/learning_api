@@ -1,23 +1,25 @@
 package com.niit.mms.learning_api.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference; // newly added
-import jakarta.persistence.*; // newly added
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Builder; // newly added
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet; // newly added
-import java.util.Set; // newly added
+import java.util.HashSet;
+import java.util.Set;
 
-@Builder // newly added
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "subject")
 public class Course {
@@ -38,7 +40,7 @@ public class Course {
     private int duration;
 
     @NotBlank(message = "Instructor is required")
-    @Size(max = 50, message = "Instructor must be at most 3 characters")
+    @Size(max = 50, message = "Instructor must be at most 50 characters")
     @Column(name = "instructor", nullable = false, length = 50)
     private String instructor;
 
@@ -48,7 +50,7 @@ public class Course {
 
     // This is what we added today (20th August 2025)
     @ManyToMany(mappedBy = "course")
-    @JsonBackReference
+//    @JsonBackReference
     @Builder.Default
     private Set<Student> student = new HashSet<>();
 
